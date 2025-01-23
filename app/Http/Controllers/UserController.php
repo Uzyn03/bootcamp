@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         // Menampilkan view dengan data pengguna
-        return view('user.index');
+        return view('users.index');
     }
 
     /**
@@ -21,6 +21,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('users.create');
     }
 
     /**
@@ -29,6 +30,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=> 'required',
+            'email'=> 'required|email|unique:users,email',
+            'password'=> 'required|min:5|confirmed',
+            'password_confirmation'=> 'required'
+
+        ]);
+        //submit data
+        dd('form tersubmit');
     }
 
     /**
