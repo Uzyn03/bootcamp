@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -12,7 +13,10 @@ class UserController extends Controller
     public function index()
     {
         // Menampilkan view dengan data pengguna
-        return view('users.index');
+    //return view('users.index');
+    
+        $users = User::all(); // Ambil semua data pengguna
+    return view('users.index', compact('users'));
     }
 
     /**
@@ -37,9 +41,19 @@ class UserController extends Controller
             'password_confirmation'=> 'required'
 
         ]);
-        //submit data
-        dd('form tersubmit');
+        // Simpan data ke database
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+    ]);
+
+    // Redirect ke halaman index dengan pesan sukses
+    return redirect()->route('users.index')->with('success', 'Data berhasil ditambahkan');
+        
     }
+    //submit data
+        // dd('form tersubmit');
 
     /**
      * Display the specified resource.
@@ -72,4 +86,4 @@ class UserController extends Controller
     {
         //
     }
-}
+};

@@ -14,22 +14,30 @@
                     <input type="text" name="name" id="name" class="form-control">
                     @error('name')
                     <small class="text-danger">{{$message}}</small>
-                        
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="email">email</label>
                     <input type="email" name="email" id="email" class="form-control">
+                    @error('email')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="password">password</label>
                     <input type="password" name="password" id="password"
                     class="form-control">
+                    @error('password')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="password_confirmation">password confirmation</label>
                     <input type="password" name="password_confirmation" id="password_confirmation"
                     class="form-control">
+                    @error('password_confirmation')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
                 </div>
                 <div class="form-group my-2">
                 <button type="submit" class="btn btn-primary text-uppercase">simpan</button>

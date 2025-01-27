@@ -18,13 +18,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($users as $index => $user); --}}
-                        <tr>
-                            <td>no</td>
-                            <td>usep</td>
-                            <td>usep@gmail.com</td>
-                            <td>opsi</td>
-                        </tr>
+                        @foreach ($users as $index => $user)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
