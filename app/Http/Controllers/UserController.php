@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -50,8 +51,8 @@ class UserController extends Controller
 
     // Redirect ke halaman index dengan pesan sukses
     return redirect()->route('users.index')->with('success', 'Data berhasil ditambahkan');
-        
     }
+    
     //submit data
         // dd('form tersubmit');
 
@@ -66,9 +67,11 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $email)
     {
         //
+        $user = User::where('email', $email)->first();
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -84,6 +87,11 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if (Auth::id() == $id){
+            return redirect()->route('users.index');
+        }
+
+        User::destroy($id);
+        return redirect()->route('users.index');
     }
-};
+}
